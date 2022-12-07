@@ -6,3 +6,6 @@ Creation of a file upload, search and processing service. Automating the creatio
 This service will be hosted on the cloud (Google Cloud) and will use the cloud functions and Buckets (Clound Storage) to perform the required tasks.
 
 ## Architecture
+
+
+## Automation Strategy
