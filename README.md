@@ -1,5 +1,5 @@
 # Data Services Orchestration
-Data Services Orchestration: Cloud functions and GCP bucket creation &amp; Configuration automation for a file processing, uploading and seraching service
+Data Services Orchestration: Cloud Functions & GCP Bucket Automation
 
 Creation of a file upload, search and processing service. Automating the creation and configuration of this service using **terraform** and **docker**
 
