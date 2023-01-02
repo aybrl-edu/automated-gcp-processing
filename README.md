@@ -17,6 +17,8 @@ We are supposed to implement the following requirement
 
 ## Cloud Functions
 
+### Descriptif d'implémentation
+
 On créera 3 cloud functions qui prendront en charge pour chacune d'elles ce qui suit : 
 
 * La recherche et le téléchargement d'une image
@@ -82,3 +84,10 @@ Screenshot du GCP
         <td><a>https://us-central1-orchestration-gcp-episen.cloudfunctions.net/orch-http-image-upload</a></td> 
     </tr>
 </table>
+
+### Deploiment et tests initiaux
+
+Comme mentionné avant, nos cloud functions seront écrites avec NodeJs. Ce choix est principalement influencé par la simplicité du langage (JS) et la grande adoption de l'environement NodeJs. 
+
+Initialement, on modifie le modèle fourni par GCP pour et on déploit les functions pour tester le bon fonctionnement des triggers.
+
