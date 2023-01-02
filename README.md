@@ -35,8 +35,8 @@ Les propriétés de chaque function sont comme suivant (figurant dans la capture
         <td>1st Generation</td>
     </tr>
     <tr>
-        <th>Region</th> 
-        <th>us-central1</th> 
+        <td>Region</td> 
+        <td>us-central1</td> 
     </tr>
     <tr>
         <td>Nom</td>
@@ -54,7 +54,31 @@ Les propriétés de chaque function sont comme suivant (figurant dans la capture
         <td>HTTPS</td>
         <td>Non (pour simplifier nos l'envoie des requetes)</td>
     </tr>
+    <tr>
+        <td>Langage Programmation</td>
+        <td>Nodejs (JS)</td>
+    </tr>
 </table>
+
+Screenshot du GCP
 
 ![image](https://user-images.githubusercontent.com/114408910/210252286-b4f5b917-8495-4ae1-8dbc-b1c4c48eac35.png)
 
+<table>
+    <tr>
+        <th>C-Function</th> 
+        <th>Trigger URL</th> 
+    </tr>
+    <tr>
+        <td>Search Function</td> 
+        <td><a>https://us-central1-orchestration-gcp-episen.cloudfunctions.net/orch-http-image-search</a></td> 
+    </tr>
+    <tr>
+        <td>Detection Function</td> 
+        <td><a>https://us-central1-orchestration-gcp-episen.cloudfunctions.net/orch-http-image-detect</a></td> 
+    </tr>
+    <tr>
+        <td>Upload Function</td> 
+        <td><a>https://us-central1-orchestration-gcp-episen.cloudfunctions.net/orch-http-image-upload</a></td> 
+    </tr>
+</table>
