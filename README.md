@@ -113,7 +113,7 @@ Pour le code des C-Functions, vous pouvez le trouver sous le répertoir de chaqu
 
 Pour cette partie, on assume la présence des Cloud Storage Buckets pour le stockage des images. On reviendra sur la partie des buckets ultérieurement sur ce rapport.
 
-#### Search Function
+#### Upload Function
 
 Cette fonction vise à implémenter un endpoint pour la recherche et le téléchargement des images "safe", cela veut dire les images classifiées comme non-offensives auparavant par la fonction de détection. Cette fonction intéragira uniquement avec le bucket "Search" qui contiendra bien entendu que les images autorisées à être consultées/téléchargées.
 
@@ -155,6 +155,17 @@ On vérifiant sur Cloud Storage on voit que l'image a été bien envoyée :
 
 ![image](https://user-images.githubusercontent.com/114408910/210261836-b1f79276-b43c-445f-83c4-de4de9133593.png)
 
+Après avoir deployé notre fonction d'upload on peut la tester avec postman, on voit dans la liste suivante les images ayant déjà présentes sur le bucket-input, on essayer par la suite d'en envoyer une nouvelle image en se basant sur le trigger de la fonction (avec Postman)
+
+![image](https://user-images.githubusercontent.com/114408910/210282075-ef4af243-7916-44f9-9055-5617c9f3320e.png)
+
+Après avoir executer la requête, on peut remarquer que l'image a été bien téléchargée sur le bucket-input : 
+
+![image](https://user-images.githubusercontent.com/114408910/210282114-75c4e672-a6b7-4305-9b45-6234769b5acc.png)
+
+/!\ Le code de la fonction est disponible sur le repo github
+
+#### Detect Function
 
 ## Cloud Storage Buckets
 
