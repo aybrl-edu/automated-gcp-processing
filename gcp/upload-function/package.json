@@ -1,4 +1,15 @@
 {
-    "name": "sample-http",
-    "version": "0.0.1"
+  "name": "sample-http",
+  "version": "0.0.1",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "busboy": "^1.6.0",
+    "@google-cloud/storage": "^6.0.0"
+  }
 }

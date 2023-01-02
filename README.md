@@ -151,7 +151,7 @@ On testant en local on reçoit le message suivant indiquant le bon envoi de l'im
 
 ![image](https://user-images.githubusercontent.com/114408910/210261786-63932703-2109-46f1-9801-7da18f2e983e.png)
 
-On vérifiant sur Cloud Storage on voit que l'iamge a été bien envoyée : 
+On vérifiant sur Cloud Storage on voit que l'image a été bien envoyée : 
 
 ![image](https://user-images.githubusercontent.com/114408910/210261836-b1f79276-b43c-445f-83c4-de4de9133593.png)
 

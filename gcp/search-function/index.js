@@ -3,10 +3,10 @@ const path = require('path');
 
 const {Storage} = require('@google-cloud/storage');
 
-// const projectId = 'orchestration-gcp-episen';
-// const BUCKET_INPUT='image-input'
+const projectId = 'orchestration-gcp-episen';
+const BUCKET_INPUT='image-input'
 
-// const storage = new Storage({projectId});
+const storage = new Storage({projectId});
 
 
 /**
@@ -22,10 +22,6 @@ exports.searchDownloadImage = (req, res) => {
 };
 
 
-const projectId = 'orchestration-gcp-episen';
-const BUCKET_INPUT='image-input'
-
-const storage = new Storage({projectId});
 
 const file = {
     name : "nodejs"
