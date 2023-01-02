@@ -97,6 +97,10 @@ Après le deploiment on enverra une requete sur l'url de déclenchement de notre
 
 ![image](https://user-images.githubusercontent.com/114408910/210254502-3b3729ef-d8f9-452f-8378-88b3ba44c53a.png)
 
+Après avoir envoyé des requetes, on peut remarquer la mise à jour des dashboards sur GCP : 
+
+![image](https://user-images.githubusercontent.com/114408910/210255985-c254ed43-13bf-46f5-af3f-45403854fb78.png)
+
 Les c-functions sont dorénavent déployées est prete à etre utilisées :
 
 ![image](https://user-images.githubusercontent.com/114408910/210254656-89bac18c-f279-4988-a592-5e39e2d85030.png)
