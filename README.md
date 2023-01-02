@@ -127,5 +127,6 @@ Les buckets seront créées suivant la configucation suivante :
 
 Voici la liste complète des buckets créées sur Cloud Storage : 
 
+![image](https://user-images.githubusercontent.com/114408910/210257587-55d7b9cd-93b4-49f6-9cbf-4a9d1589c80d.png)
 
 
