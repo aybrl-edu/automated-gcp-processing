@@ -101,3 +101,4 @@ Les c-functions sont dorénavent déployées est prete à etre utilisées :
 
 ![image](https://user-images.githubusercontent.com/114408910/210254656-89bac18c-f279-4988-a592-5e39e2d85030.png)
 
+Pour le code des c-functions, vous pouvez le trouver sous le répertoir de chaque c-function repectivement sous le répertoir (GCP) de cette repository (<a href="https://github.com/aybrl-edu/automated-gcp-processing">Repo GitHub</a>)
