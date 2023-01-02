@@ -54,7 +54,7 @@ Les propriétés de chaque function sont comme suivant (figurant dans la capture
     </tr>
     <tr>
         <td>HTTPS</td>
-        <td>Non (pour simplifier nos l'envoie des requetes)</td>
+        <td>Non (pour simplifier nos l'envoie des requêtes)</td>
     </tr>
     <tr>
         <td>Langage Programmation</td>
@@ -97,17 +97,28 @@ Après le deploiment on enverra une requete sur l'url de déclenchement de notre
 
 ![image](https://user-images.githubusercontent.com/114408910/210254502-3b3729ef-d8f9-452f-8378-88b3ba44c53a.png)
 
-Après avoir envoyé des requetes, on peut remarquer la mise à jour des dashboards sur GCP : 
+Après avoir envoyé des requêtes, on peut remarquer la mise à jour des dashboards sur GCP : 
 
 ![image](https://user-images.githubusercontent.com/114408910/210255985-c254ed43-13bf-46f5-af3f-45403854fb78.png)
 
-Les c-functions sont dorénavent déployées est prete à etre utilisées :
+Les Cloud Functions sont dorénavent déployées est prête à etre utilisées :
 
 ![image](https://user-images.githubusercontent.com/114408910/210254656-89bac18c-f279-4988-a592-5e39e2d85030.png)
 
 ### Implémentation C-Functions
 
-Pour le code des c-functions, vous pouvez le trouver sous le répertoir de chaque c-function repectivement sous le répertoir (GCP) de cette repository (<a href="https://github.com/aybrl-edu/automated-gcp-processing/tree/master/gcp">Repo GitHub</a>)
+Pour le code des C-Functions, vous pouvez le trouver sous le répertoir de chaque c-function repectivement sous le répertoir (GCP) de cette repository (<a href="https://github.com/aybrl-edu/automated-gcp-processing/tree/master/gcp">Repo GitHub</a>)
 
 ![image](https://user-images.githubusercontent.com/114408910/210255410-5e7bdfcb-a3a9-4765-988a-19d3db9fc9a8.png)
 
+Pour cette partie, on assume la présence des Cloud Storage Buckets pour le stockage des images. On reviendra sur la partie des buckets ultérieurement sur ce rapport.
+
+## Cloud Storage Buckets
+
+On créera 3 buckets pour le stockage des : 
+
+* Toutes les Images initialement (Venant de la fonction upload)
+* Les images Non-Offensives (è consommer par la fonction serach après classification par la fonction detect)
+* Les images Offensives (après classification par la fonction detect)
+
+Les buckets seront créées suivant la configucation suivante : 
