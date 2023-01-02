@@ -122,3 +122,6 @@ On créera 3 buckets pour le stockage des :
 * Les images Offensives (après classification par la fonction detect)
 
 Les buckets seront créées suivant la configucation suivante : 
+
+![image](https://user-images.githubusercontent.com/114408910/210257258-51abb398-2633-45d5-aeb0-44a967bc545a.png)
+
