@@ -35,6 +35,10 @@ Les propriétés de chaque function sont comme suivant (figurant dans la capture
         <td>1st Generation</td>
     </tr>
     <tr>
+        <th>Region</th> 
+        <th>us-central1</th> 
+    </tr>
+    <tr>
         <td>Nom</td>
         <td>orc-http-image-{search, detect, upload}</td>
     </tr>
@@ -51,4 +55,6 @@ Les propriétés de chaque function sont comme suivant (figurant dans la capture
         <td>Non (pour simplifier nos l'envoie des requetes)</td>
     </tr>
 </table>
+
+![image](https://user-images.githubusercontent.com/114408910/210252286-b4f5b917-8495-4ae1-8dbc-b1c4c48eac35.png)
 
