@@ -113,6 +113,48 @@ Pour le code des C-Functions, vous pouvez le trouver sous le répertoir de chaqu
 
 Pour cette partie, on assume la présence des Cloud Storage Buckets pour le stockage des images. On reviendra sur la partie des buckets ultérieurement sur ce rapport.
 
+#### Search Function
+
+Cette fonction vise à implémenter un endpoint pour la recherche et le téléchargement des images "safe", cela veut dire les images classifiées comme non-offensives auparavant par la fonction de détection. Cette fonction intéragira uniquement avec le bucket "Search" qui contiendra bien entendu que les images autorisées à être consultées/téléchargées.
+
+On va essayer de commencer avec l'exemple suivant pour tester le téléchargement des images avec nodejs vers notre bucket.
+
+```
+const projectId = 'orchestration-gcp-episen';
+const BUCKET_INPUT='image-input'
+
+const storage = new Storage({projectId});
+
+const file = {
+    name : "nodejs"
+}
+
+async function uploadImageToBucketTest(file, blurredBucketName){
+    // upload image to bucket
+    const tempLocalPath = "nodejs.png"
+    const blurredBucket = storage.bucket(blurredBucketName);
+    const gcsPath = `gs://${blurredBucketName}/${file.name}`;
+
+    try {
+        await blurredBucket.upload(tempLocalPath, {destination: file.name});
+        console.log(`Uploaded image to: ${gcsPath}`);
+    } catch (err) {
+        throw new Error(`Unable to upload image to ${gcsPath}: ${err}`);
+    }
+}
+
+uploadImageToBucketTest(file, BUCKET_INPUT)
+
+````
+
+On testant en local on reçoit le message suivant indiquant le bon envoi de l'image vers notre bucket image-search : 
+
+
+
+On vérifiant sur Cloud Storage on voit que l'iamge a été bien envoyée : 
+
+
+
 ## Cloud Storage Buckets
 
 On créera 3 buckets pour le stockage des : 
