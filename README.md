@@ -13,3 +13,42 @@ We are supposed to implement the following requirement
 
 
 ## Automation Strategy
+
+
+## Cloud Functions
+
+On créera 3 cloud functions qui prendront en charge pour chacune d'elles ce qui suit : 
+
+* La recherche et le téléchargement d'une image
+* Le filtrage et la détection des images offensives
+* Le téléchargement d'une image vers le cloud
+
+Les propriétés de chaque function sont comme suivant (figurant dans la capture d'écran en dessous) : 
+
+<table>
+    <tr>
+        <th>Propriété</th> 
+        <th>Valeur</th> 
+    </tr>
+    <tr>
+        <td>Environment</td>
+        <td>1st Generation</td>
+    </tr>
+    <tr>
+        <td>Nom</td>
+        <td>orc-http-image-{search, detect, upload}</td>
+    </tr>
+    <tr>
+        <td>Trigger</td>
+        <td>HTTP</td>
+    </tr>
+    <tr>
+        <td>Authentification</td>
+        <td>Sans (pour vous faciliter l'intéraction avec les c-functions)</td>
+    </tr>
+    <tr>
+        <td>HTTPS</td>
+        <td>Non (pour simplifier nos l'envoie des requetes)</td>
+    </tr>
+</table>
+
