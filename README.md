@@ -103,5 +103,7 @@ Les c-functions sont dorénavent déployées est prete à etre utilisées :
 
 ### Implémentation C-Functions
 
-Pour le code des c-functions, vous pouvez le trouver sous le répertoir de chaque c-function repectivement sous le répertoir (GCP) de cette repository (<a href="https://github.com/aybrl-edu/automated-gcp-processing">Repo GitHub</a>)
+Pour le code des c-functions, vous pouvez le trouver sous le répertoir de chaque c-function repectivement sous le répertoir (GCP) de cette repository (<a href="https://github.com/aybrl-edu/automated-gcp-processing/tree/master/gcp">Repo GitHub</a>)
+
+![image](https://user-images.githubusercontent.com/114408910/210255410-5e7bdfcb-a3a9-4765-988a-19d3db9fc9a8.png)
 
