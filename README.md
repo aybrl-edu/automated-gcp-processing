@@ -89,5 +89,15 @@ Screenshot du GCP
 
 Comme mentionné avant, nos cloud functions seront écrites avec NodeJs. Ce choix est principalement influencé par la simplicité du langage (JS) et la grande adoption de l'environement NodeJs. 
 
-Initialement, on modifie le modèle fourni par GCP pour et on déploit les functions pour tester le bon fonctionnement des triggers.
+Initialement, on modifie le modèle fourni par GCP pour et on déploit les functions pour tester le bon fonctionnement des triggers :
+
+![image](https://user-images.githubusercontent.com/114408910/210253863-5348eea3-2858-4c4e-b56d-adccee037601.png)
+
+Après le deploiment on enverra une requete sur l'url de déclenchement de notre c-function pour vérifier que cette dernièrre se déclenche correctement :
+
+![image](https://user-images.githubusercontent.com/114408910/210254502-3b3729ef-d8f9-452f-8378-88b3ba44c53a.png)
+
+Les c-functions sont dorénavent déployées est prete à etre utilisées :
+
+![image](https://user-images.githubusercontent.com/114408910/210254656-89bac18c-f279-4988-a592-5e39e2d85030.png)
 
