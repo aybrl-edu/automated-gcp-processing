@@ -2,6 +2,8 @@
 
 ING 3 FISA DATA | Mohammed Ayoub BERHILI
 
+<a href="https://github.com/aybrl-edu/automated-gcp-processing">Github Repository Of This Project</a>
+
 Data Services Orchestration: Cloud Functions & GCP Bucket Automation
 
 Creation of a file upload, search and processing service. Automating the creation and configuration of this service using **terraform** and **docker**
@@ -15,6 +17,61 @@ We are supposed to implement the following requirement
 ## Conception
 
 ![image](https://user-images.githubusercontent.com/114408910/210389574-7f5ede86-94f4-4e3c-9c97-9ac9a1b13c05.png)
+
+Ce qui manque à faire : étant donné que j'avais du refaire mon TP à cause des problèmes liés à mon compte GCP, j'étais contraint par le temps et je n'ai pas tout implémenté comme demandé. Il manque l'implémentation d'une interface web pour l'interaction avec les C-Functions implémentées. Dans la partie suivant j'expliquerai comment peut-on tester ces fonctions sans devoir passer par une interface web (avec Postman).
+
+## Usage
+### 1- Image Upload
+Sur Postman
+![image](https://user-images.githubusercontent.com/114408910/210396182-b6946a96-a00e-405b-9d87-fee0c045af61.png)
+
+Le curl du requête
+```
+curl --location --request POST 'https://us-central1-orchestration-gcp-episen.cloudfunctions.net/orch-http-image-upload' --form 'image=@"PATH_TO_IMAGE"'
+```
+
+Résultat (Image non offensive)
+**Sur le bucket-input**
+
+![image](https://user-images.githubusercontent.com/114408910/210396658-eb19e3b0-792e-4ab1-9bef-d4b404850f0a.png)
+
+**Sur le bucket-unblurred**
+![image](https://user-images.githubusercontent.com/114408910/210403451-c582a617-4133-49d3-95f4-cd9ce635dd8c.png)
+
+Résultat (Image offensive)
+**Sur le bucket-input**
+![image](https://user-images.githubusercontent.com/114408910/210403594-286ddf42-89e6-4a96-b30b-a2b64eb08e53.png)
+
+**Sur le bucket-blurred**
+![image](https://user-images.githubusercontent.com/114408910/210403657-8dfddcaf-95e7-40bb-a991-1362e3e35737.png)
+
+
+### 2- Search 
+Sur Postman
+![image](https://user-images.githubusercontent.com/114408910/210403890-f48b64e1-1769-4672-910d-416f56b8479e.png)
+
+Le curl du requête
+```
+curl --location --request GET 'https://us-central1-orchestration-gcp-episen.cloudfunctions.net/orch-http-image-search'
+```
+
+Si l'image téléchargée dans l'étape précédente n'est pas offensive, on doit la voir dans la liste des images récupérées, sinon elle en sera présente. (L'exemple de l'image off_blood => offensive)
+
+### 3- Detect
+
+Comme vu avant, la détéction se fera automatiquement après le téléchargement de l'image, mais sinon on peut faire la détéction manuellement en envoyant une requête à l'url de la fonction Detect
+
+Le curl du requête
+
+```
+curl --location --request POST 'https://us-central1-orchestration-gcp-episen.cloudfunctions.net/orch-http-image-detect' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "imageId" : "NOM_IMAGE"
+}'
+```
+
+Dans la partie suivante j'explique l'implémentation de chaque function ainsi que son code (toujours disponible sur github)
 
 ## Cloud Functions
 
@@ -164,7 +221,105 @@ Après avoir executer la requête, on peut remarquer que l'image a été bien t�
 
 ![image](https://user-images.githubusercontent.com/114408910/210282114-75c4e672-a6b7-4305-9b45-6234769b5acc.png)
 
-/!\ Le code de la fonction est disponible sur le repo github
+Le code de la fonction (disponible sur le repo github) :
+
+```
+const fs = require('fs');
+const path = require('path');
+const axios = require('axios')
+
+const Busboy = require('busboy');
+const {Storage} = require('@google-cloud/storage');
+
+const projectId = 'orchestration-gcp-episen';
+const BUCKET_INPUT='image-input'
+const DETECT_FUNCTION_URL='https://us-central1-orchestration-gcp-episen.cloudfunctions.net/orc-http-image-detect'
+
+const storage = new Storage({projectId});
+
+// Use the express-fileupload middleware
+
+
+
+/**
+ * Responds to any HTTP request.
+ *
+ * @param {!express:Request} req HTTP request context.
+ * @param {!express:Response} res HTTP response context.
+ */
+exports.upload = (req, res) => {
+    // Get the file that was set to our field named "image"
+
+    const busboy = Busboy({ headers: req.headers });
+
+    // Image uploads obj
+    const uploads = {};
+
+    const fileWrites = [];
+
+    // This code will process each file uploaded.
+    busboy.on('file', (fieldname, file, filename) => {
+        console.log(`Processed image ${filename.filename}`);
+
+        const filepath = path.join('/tmp', filename.filename);
+        uploads[fieldname] = filepath;
+
+        const writeStream = fs.createWriteStream(filepath);
+        file.pipe(writeStream);    
+
+        // File was processed by Busboy; wait for it to be written to disk.
+        const promise = new Promise((resolve, reject) => {
+            file.on('end', () => {
+                writeStream.end();
+            });
+            writeStream.on('finish', resolve);
+            writeStream.on('error', reject);
+        });
+        fileWrites.push(promise);
+    });
+
+    busboy.on('finish', () => {
+        Promise.all(fileWrites)
+        .then(() => {
+            for (const name in uploads) {
+                const file = uploads[name];
+                async function upload2bucket() {
+                    fileRes = await storage.bucket(BUCKET_INPUT).upload(file);
+                    fs.unlinkSync(file);
+
+                    console.log(fileRes[0].name)
+                    const post_data = {
+                        "imageId" : fileRes[0].name
+                    }
+
+                    await axios.post(DETECT_FUNCTION_URL, post_data)
+
+                    res.send(fileRes);
+                }
+                upload2bucket()
+            }
+        });
+    });
+
+    busboy.end(req.rawBody);
+    
+};
+
+
+// Old function
+async function uploadImageToBucket(imageName, tempLocalPath){
+    // upload image to bucket
+    const blurredBucket = storage.bucket(BUCKET_INPUT);
+    const gcsPath = `gs://${BUCKET_INPUT}/${imageName}`;
+
+    try {
+        await blurredBucket.upload(tempLocalPath, {destination: imageName});
+        console.log(`Uploaded image to: ${gcsPath}`);
+    } catch (err) {
+        throw new Error(`Unable to upload image to ${gcsPath}: ${err}`);
+    }
+}
+```
 
 #### Detect Function
 
