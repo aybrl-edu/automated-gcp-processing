@@ -167,6 +167,10 @@ Après avoir executer la requête, on peut remarquer que l'image a été bien t�
 
 #### Detect Function
 
+
+
+#### Detect Function
+
 ## Cloud Storage Buckets
 
 On créera 3 buckets pour le stockage des : 
