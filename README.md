@@ -9,11 +9,9 @@ We are supposed to implement the following requirement
 
 ![image](https://user-images.githubusercontent.com/114408910/206791199-a6408e11-2ac2-4446-8f27-a1a76ee03844.png)
 
-## Architecture
+## Conception
 
-
-## Automation Strategy
-
+![image](https://user-images.githubusercontent.com/114408910/210389574-7f5ede86-94f4-4e3c-9c97-9ac9a1b13c05.png)
 
 ## Cloud Functions
 
