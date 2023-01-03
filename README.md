@@ -328,6 +328,7 @@ Exemple (réponse http) :
     }
 ]
 ```
+![image](https://user-images.githubusercontent.com/114408910/210388313-29912ee0-8992-41d5-b040-38c6bd25d865.png)
 
 L'objet de réponse contient le nom de l'image ainsi que son url de type media (pour l'affichage et le téléchargemet)
 
