@@ -9,7 +9,8 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "busboy": "^1.6.0",
-    "@google-cloud/storage": "^6.0.0"
+    "@google-cloud/storage": "^6.0.0",
+    "axios": "^1.2.2",
+    "busboy": "^1.6.0"
   }
 }

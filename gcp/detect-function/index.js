@@ -94,7 +94,9 @@ async function blurImageAndSaveToBucket(file) {
     }
 
     // Delete the temporary file.
-    return fs.unlink(tempLocalPath);
+    fs.unlinkSync(tempLocalPath);
+
+    return;
 }
 
 async function saveToBucket(file) {

@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
-const http = require('http');
+const axios = require('axios')
 
 const Busboy = require('busboy');
 const {Storage} = require('@google-cloud/storage');
 
 const projectId = 'orchestration-gcp-episen';
 const BUCKET_INPUT='image-input'
-const DETECT_FUNCTION_URL='image-input'
+const DETECT_FUNCTION_URL='https://us-central1-orchestration-gcp-episen.cloudfunctions.net/orc-http-image-detect'
 
 const storage = new Storage({projectId});
 
@@ -35,7 +35,7 @@ exports.upload = (req, res) => {
     busboy.on('file', (fieldname, file, filename) => {
         console.log(`Processed image ${filename.filename}`);
 
-        const filepath = path.join('/tmp', filename.filename);
+        const filepath = path.join(filename.filename);
         uploads[fieldname] = filepath;
 
         const writeStream = fs.createWriteStream(filepath);
@@ -61,19 +61,12 @@ exports.upload = (req, res) => {
                     fileRes = await storage.bucket(BUCKET_INPUT).upload(file);
                     fs.unlinkSync(file);
 
-                    // Send to Analyze
-                    const reqObj = {
-                        host: DETECT_FUNCTION_URL,
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                    console.log(fileRes[0].name)
+                    const post_data = {
+                        "imageId" : fileRes[0].name
+                    }
 
-                        body : JSON.stringify({
-                            "imageId" : filename.filename
-                        })
-                    };
-                    http.request(reqObj)
+                    await axios.post(DETECT_FUNCTION_URL, post_data)
 
                     res.send(fileRes);
                 }
