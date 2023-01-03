@@ -174,9 +174,6 @@ Notre detect function prend le nom d'une images en corps de la POST request, pui
 Example : Sur GCP, l'onglet Testing de la Detect Function, on enverra le nom d'une image déjà sauvegradée sur le bucket-input (elephant.jpg) :
 
 
-
-#### Detect Function
-
 ## Cloud Storage Buckets
 
 On créera 3 buckets pour le stockage des : 
