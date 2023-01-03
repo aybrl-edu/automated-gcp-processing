@@ -316,6 +316,52 @@ async function saveToBucket(file) {
 
 #### Search Function
 
+Cette fonction récupère tout simplement toutes les images dans le bucket-unblurred. Il fallait tout d'abord rendre les objets de ce bucket publiques pour accès depuis internet.
+
+Exemple (réponse http) :
+
+```
+[
+    {
+        "image": "elephant.jpg",
+        "link": "https://storage.googleapis.com/download/storage/v1/b/image-unblurred/o/elephant.jpg?generation=1672757457733781&alt=media"
+    }
+]
+```
+
+L'objet de réponse contient le nom de l'image ainsi que son url de type media (pour l'affichage et le téléchargemet)
+
+Code (Dispo également sur github) :
+
+```
+const fs = require('fs');
+const path = require('path');
+
+const {Storage} = require('@google-cloud/storage');
+
+const projectId = 'orchestration-gcp-episen';
+const BUCKET_UNBLURRED='image-unblurred'
+
+const storage = new Storage({projectId});
+
+// Use the express-fileupload middleware
+
+/**
+ * Responds to any HTTP request.
+ *
+ * @param {!express:Request} req HTTP request context.
+ * @param {!express:Response} res HTTP response context.
+ */
+exports.search = async (req, res) => {
+    const [files] = await storage.bucket(BUCKET_UNBLURRED).getFiles()
+
+    const resObj = []
+    files.forEach(file => resObj.push({'image' : file.name, 'link' : file.metadata.mediaLink}))
+    
+    res.send(resObj)
+};
+```
+
 ## Cloud Storage Buckets
 
 On créera 3 buckets pour le stockage des : 
