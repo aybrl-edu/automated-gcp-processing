@@ -1,5 +1,5 @@
 {
-  "name": "sample-http",
+  "name": "upload-image",
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {

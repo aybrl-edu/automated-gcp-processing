@@ -1,11 +1,13 @@
 const fs = require('fs');
 const path = require('path');
+const http = require('http');
 
 const Busboy = require('busboy');
 const {Storage} = require('@google-cloud/storage');
 
 const projectId = 'orchestration-gcp-episen';
 const BUCKET_INPUT='image-input'
+const DETECT_FUNCTION_URL='image-input'
 
 const storage = new Storage({projectId});
 
@@ -33,7 +35,7 @@ exports.upload = (req, res) => {
     busboy.on('file', (fieldname, file, filename) => {
         console.log(`Processed image ${filename.filename}`);
 
-        const filepath = path.join(filename.filename);
+        const filepath = path.join('/tmp', filename.filename);
         uploads[fieldname] = filepath;
 
         const writeStream = fs.createWriteStream(filepath);
@@ -58,6 +60,21 @@ exports.upload = (req, res) => {
                 async function upload2bucket() {
                     fileRes = await storage.bucket(BUCKET_INPUT).upload(file);
                     fs.unlinkSync(file);
+
+                    // Send to Analyze
+                    const reqObj = {
+                        host: DETECT_FUNCTION_URL,
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+
+                        body : JSON.stringify({
+                            "imageId" : filename.filename
+                        })
+                    };
+                    http.request(reqObj)
+
                     res.send(fileRes);
                 }
                 upload2bucket()
