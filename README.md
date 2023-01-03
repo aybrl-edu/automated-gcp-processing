@@ -167,6 +167,12 @@ Après avoir executer la requête, on peut remarquer que l'image a été bien t�
 
 #### Detect Function
 
+Cette fonction a pour objectif de detecter les images offenssives et les envoyer ensuite dans un bucket s'appellant, bucket-blurred. Si l'image n'est pas jugée offenssive, elle sera envoyée vers le bucket-unblurred et sera exposée par la suite aux utilisateurs par la C-Function Search Fucntion.
+
+Notre detect function prend le nom d'une images en corps de la POST request, puis elle récuperera cette image depuis le bucket-input. Après, et à travers l'api vision du GCP SDK, la fonction classifie l'image et puis fera l'envoie soit vers bucket-blurred soit vers bucket-unblurred.
+
+Example : Sur GCP, l'onglet Testing de la Detect Function, on enverra le nom d'une image déjà sauvegradée sur le bucket-input (elephant.jpg) :
+
 
 
 #### Detect Function
